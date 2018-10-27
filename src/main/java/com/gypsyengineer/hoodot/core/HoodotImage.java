@@ -17,6 +17,10 @@ public class HoodotImage implements Image {
         }
     }
 
+    public static HoodotImage from(BufferedImage image) {
+        return new HoodotImage(image);
+    }
+
     private HoodotImage(BufferedImage image) {
         this.image = image;
     }
@@ -29,5 +33,10 @@ public class HoodotImage implements Image {
     @Override
     public int height() {
         return image.getHeight();
+    }
+
+    @Override
+    public BufferedImage bufferedImage() {
+        return image;
     }
 }
