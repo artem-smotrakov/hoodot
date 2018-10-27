@@ -11,13 +11,23 @@ public class HoodotImage implements Image {
 
     private final BufferedImage image;
 
-    private HoodotImage(BufferedImage image) {
-        this.image = image;
-    }
-
     public static HoodotImage fromFile(String filename) throws IOException {
         try (InputStream is = Files.newInputStream(Paths.get(filename))) {
             return new HoodotImage(ImageIO.read(is));
         }
+    }
+
+    private HoodotImage(BufferedImage image) {
+        this.image = image;
+    }
+
+    @Override
+    public int width() {
+        return image.getWidth();
+    }
+
+    @Override
+    public int height() {
+        return image.getHeight();
     }
 }
