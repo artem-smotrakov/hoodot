@@ -9,6 +9,10 @@ public class WhatTheHell extends RuntimeException {
         return new WhatTheHell(message);
     }
 
+    public static WhatTheHell whatTheHell(String message, Object... args) {
+        return new WhatTheHell(String.format(message, args));
+    }
+
     public static WhatTheHell whatTheHell(String message, Throwable t) {
         return new WhatTheHell(message, t);
     }

@@ -18,6 +18,15 @@ public class WhatTheHellTest {
     }
 
     @Test
+    public void throwWithFormat() {
+        try {
+            throw whatTheHell("wow %d %s", 42, "hoodot");
+        } catch (WhatTheHell e) {
+            assertEquals("wow 42 hoodot", e.getMessage());
+        }
+    }
+
+    @Test
     public void throwWithCause() {
         try {
             throw whatTheHell("yup", new RuntimeException("cause"));
