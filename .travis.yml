@@ -1,0 +1,14 @@
+language: java
+dist: trusty
+
+jdk:
+  - openjdk11
+
+before_install:
+  - ./gradlew wrapper --gradle-version 4.10.2
+
+after_success:
+  - ./gradlew jacocoTestReport coveralls
+
+script:
+  - ./gradlew check
