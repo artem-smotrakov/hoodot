@@ -19,4 +19,15 @@ public class TestUtil {
         }
     }
 
+    public static void expectException(TestAction action, Class clazz) {
+        try {
+            action.run();
+            fail(String.format("expected %s", clazz.getSimpleName()));
+        } catch (Exception e) {
+            if (!e.getClass().equals(clazz)) {
+                fail(String.format("unexpected exception: %s", e.getClass().getSimpleName()));
+            }
+        }
+    }
+
 }

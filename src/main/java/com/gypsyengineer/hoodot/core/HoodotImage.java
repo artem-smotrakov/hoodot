@@ -1,6 +1,7 @@
 package com.gypsyengineer.hoodot.core;
 
 import javax.imageio.ImageIO;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
@@ -33,6 +34,11 @@ public class HoodotImage implements Image {
     @Override
     public int height() {
         return image.getHeight();
+    }
+
+    @Override
+    public Color color(int x, int y) {
+        return new Color(bufferedImage().getRGB(x, y));
     }
 
     @Override

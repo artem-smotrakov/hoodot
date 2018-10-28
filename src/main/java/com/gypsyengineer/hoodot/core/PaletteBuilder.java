@@ -1,7 +1,6 @@
 package com.gypsyengineer.hoodot.core;
 
 import java.awt.*;
-import java.awt.image.IndexColorModel;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,9 +10,7 @@ public class PaletteBuilder {
 
     public static final int bits = 16;
 
-    private final List<Byte> red = new ArrayList<>();
-    private final List<Byte> green = new ArrayList<>();
-    private final List<Byte> blue = new ArrayList<>();
+    private final List<Color> colors = new ArrayList<>();
 
     public static PaletteBuilder paletteBuilder() {
         return new PaletteBuilder();
@@ -22,36 +19,17 @@ public class PaletteBuilder {
     private PaletteBuilder() {}
 
     public PaletteBuilder color(int r, int g, int b) {
-        red.add(check(r));
-        green.add(check(g));
-        blue.add(check(b));
-
+        colors.add(new Color(r, g, b));
         return this;
     }
 
     public PaletteBuilder color(Color color) {
-        red.add(check(color.getRed()));
-        green.add(check(color.getGreen()));
-        blue.add(check(color.getBlue()));
-
+        colors.add(color);
         return this;
     }
 
     public Palette create() {
-        return HoodotPalette.newPalette(model());
-    }
-
-    private IndexColorModel model() {
-        int size = red.size();
-        if (green.size() != size) {
-            throw whatTheHell("too much green!");
-        }
-        if (blue.size() != size) {
-            throw whatTheHell("too much blue!");
-        }
-
-        return new IndexColorModel(bits, size,
-                toBytes(red), toBytes(green), toBytes(blue));
+        return HoodotPalette.newPalette(colors.toArray(new Color[0]));
     }
 
     private static byte check(int color) {

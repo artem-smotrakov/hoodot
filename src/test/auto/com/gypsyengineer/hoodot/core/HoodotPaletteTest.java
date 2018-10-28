@@ -4,7 +4,7 @@ import org.junit.Test;
 
 import java.awt.*;
 
-import static com.gypsyengineer.hoodot.TestUtil.expectWhatTheHell;
+import static com.gypsyengineer.hoodot.TestUtil.expectException;
 import static com.gypsyengineer.hoodot.core.PaletteBuilder.paletteBuilder;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -37,11 +37,23 @@ public class HoodotPaletteTest {
 
     @Test
     public void wrongColor() throws Exception {
-        expectWhatTheHell(() -> paletteBuilder().color(300, 0, 0));
-        expectWhatTheHell(() -> paletteBuilder().color(0, 300, 0));
-        expectWhatTheHell(() -> paletteBuilder().color(0, 0, 300));
-        expectWhatTheHell(() -> paletteBuilder().color(-1, 0, 0));
-        expectWhatTheHell(() -> paletteBuilder().color(0, -1, 0));
-        expectWhatTheHell(() -> paletteBuilder().color(0, 0, -1));
+        expectException(
+                () -> paletteBuilder().color(300, 0, 0),
+                IllegalArgumentException.class);
+        expectException(
+                () -> paletteBuilder().color(0, 300, 0),
+                IllegalArgumentException.class);
+        expectException(
+                () -> paletteBuilder().color(0, 0, 300),
+                IllegalArgumentException.class);
+        expectException(
+                () -> paletteBuilder().color(-1, 0, 0),
+                IllegalArgumentException.class);
+        expectException(
+                () -> paletteBuilder().color(0, -1, 0),
+                IllegalArgumentException.class);
+        expectException(
+                () -> paletteBuilder().color(0, 0, -1),
+                IllegalArgumentException.class);
     }
 }

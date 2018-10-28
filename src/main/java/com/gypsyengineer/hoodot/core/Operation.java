@@ -20,7 +20,7 @@ public interface Operation {
      * Just to make code to look like a human language.
      */
 
-    default Image with(Image image) {
+    default Image to(Image image) {
         return apply(image);
     }
 
