@@ -26,7 +26,7 @@ sourceSets {
         }
     }
 
-    auto_tests {
+    test {
         java {
             srcDirs 'src/test/auto'
         }
