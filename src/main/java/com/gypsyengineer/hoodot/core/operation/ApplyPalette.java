@@ -7,13 +7,14 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.Objects;
 
+import static com.gypsyengineer.hoodot.core.SmartDistance.smartDistance;
 import static com.gypsyengineer.hoodot.util.WhatTheHell.whatTheHell;
 import static java.awt.image.BufferedImage.TYPE_INT_RGB;
 
 public class ApplyPalette implements Operation {
 
     private Palette palette;
-    private ColorDistance distance;
+    private ColorDistance distance = smartDistance();
 
     public static ApplyPalette applyPalette() {
         return new ApplyPalette();
