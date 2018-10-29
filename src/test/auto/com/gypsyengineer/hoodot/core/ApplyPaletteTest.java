@@ -5,9 +5,9 @@ import org.junit.Test;
 import java.awt.*;
 import java.io.IOException;
 
-import static com.gypsyengineer.hoodot.core.EuclideanDistance.euclideanDistance;
-import static com.gypsyengineer.hoodot.core.PaletteBuilder.paletteBuilder;
 import static com.gypsyengineer.hoodot.core.WeightedEuclideanDistance.weightedEuclideanDistance;
+import static com.gypsyengineer.hoodot.core.PaletteBuilder.paletteBuilder;
+import static com.gypsyengineer.hoodot.core.SmartDistance.smartDistance;
 import static com.gypsyengineer.hoodot.core.operation.ApplyPalette.applyPalette;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -28,7 +28,7 @@ public class ApplyPaletteTest {
 
         Image newImage = applyPalette()
                 .set(blackWhiteGray)
-                .set(weightedEuclideanDistance())
+                .set(smartDistance())
                 .to(image);
 
         assertEquals(image.width(), newImage.width());
@@ -54,7 +54,7 @@ public class ApplyPaletteTest {
 
         Image newImage = applyPalette()
                 .set(blackWhiteGray)
-                .set(euclideanDistance())
+                .set(weightedEuclideanDistance())
                 .to(image);
 
         assertEquals(image.width(), newImage.width());

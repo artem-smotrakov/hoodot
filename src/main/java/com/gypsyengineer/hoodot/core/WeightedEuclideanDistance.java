@@ -4,23 +4,40 @@ import java.awt.*;
 
 public class WeightedEuclideanDistance implements ColorDistance {
 
+    private int rWeight = 1;
+    private int gWeight = 1;
+    private int bWeight = 1;
+
     public static WeightedEuclideanDistance weightedEuclideanDistance() {
         return new WeightedEuclideanDistance();
     }
 
     private WeightedEuclideanDistance() {}
 
-    /**
-     * See https://www.compuphase.com/cmetric.htm for details.
-     */
+    public WeightedEuclideanDistance red(int weight) {
+        rWeight = weight;
+        return this;
+    }
+
+    public WeightedEuclideanDistance green(int weight) {
+        gWeight = weight;
+        return this;
+    }
+
+    public WeightedEuclideanDistance blue(int weight) {
+        bWeight = weight;
+        return this;
+    }
+
     @Override
     public double get(Color first, Color second) {
-        int red1 = first.getRed();
-        int red2 = second.getRed();
-        int rmean = (red1 + red2) / 2;
-        int r = red1 - red2;
-        int g = first.getGreen() - second.getGreen();
-        int b = first.getBlue() - second.getBlue();
-        return Math.sqrt((((512 + rmean) * r * r) >> 8) + 4 * g * g + (((767 - rmean) * b * b) >> 8));
+        double r = rWeight * pow2(first.getRed() - second.getRed());
+        double g = gWeight * pow2(first.getGreen() - second.getGreen());
+        double b = bWeight * pow2(first.getBlue() - second.getBlue());
+        return Math.sqrt(r + g + b);
+    }
+
+    private static double pow2(int a) {
+        return a * a;
     }
 }
